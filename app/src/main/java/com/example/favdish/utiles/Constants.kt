@@ -9,7 +9,7 @@ object  Constants {
     //key value
     const val TAGE_VALUE = "vegetarian, dessert"
     const val API_ENDPOINTS = "recipes/random"
-    const val APIKEY = "d80d518a55ea4b8aaf3cc52269eec2be"
+    const val APIKEY = "APi KEY HERE"
     // KEY PARAMS
     const val API_KEY: String = "apiKey"
     const val TAGS: String = "tags"
