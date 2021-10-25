@@ -8,10 +8,16 @@ import com.example.favdish.models.FavDish
 import com.example.favdish.models.networkmodel.RandomRecipesResponce
 import com.example.favdish.repository.FavDishRepository
 import com.example.favdish.utiles.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RandomDishViewModel(private val repository: FavDishRepository): ViewModel() {
+@HiltViewModel
+class RandomDishViewModel
+@Inject constructor(
+    private val repository: FavDishRepository
+) : ViewModel() {
 
 
     private val _randomDish = MutableLiveData<Resource<RandomRecipesResponce>>()
@@ -21,7 +27,7 @@ class RandomDishViewModel(private val repository: FavDishRepository): ViewModel(
         getRandomDish()
     }
 
-    fun getRandomDish(){
+    fun getRandomDish() {
         viewModelScope.launch {
             _randomDish.postValue(Resource.Loading())
             val response = repository.getRandomDish()
@@ -29,7 +35,7 @@ class RandomDishViewModel(private val repository: FavDishRepository): ViewModel(
         }
     }
 
-    fun addDishTODatabase(favDish: FavDish){
+    fun addDishTODatabase(favDish: FavDish) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertDish(favDish)
         }

@@ -15,19 +15,17 @@ import com.example.favdish.databinding.FragmentRandomDishesBinding
 import com.example.favdish.models.FavDish
 import com.example.favdish.models.networkmodel.RandomRecipesResponce
 import com.example.favdish.ui.viewmodel.RandomDishViewModel
-import com.example.favdish.ui.viewmodel.FavDishViewModelProvider
 import com.example.favdish.utiles.Constants
 import com.example.favdish.utiles.Resource
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class RandomDishes : Fragment(R.layout.fragment_random_dishes) {
 
     private var _binding: FragmentRandomDishesBinding? = null
     private val binding get() = _binding!!
     private var mProgressDialog: Dialog? = null
-    private val mRandomDishViewModel: RandomDishViewModel by viewModels {
-        FavDishViewModelProvider((activity?.application as FavDishApplication).repository)
-    }
+    private val mRandomDishViewModel: RandomDishViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentRandomDishesBinding.bind(view)

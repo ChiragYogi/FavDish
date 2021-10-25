@@ -4,7 +4,11 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-parcelize'
+    id'dagger.hilt.android.plugin'
 }
+
+def apiKeyProperties = new Properties()
+apiKeyProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     compileSdk 30
@@ -17,6 +21,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "API_KEY", apiKeyProperties['API_KEY'])
     }
 
     buildTypes {
@@ -82,8 +87,16 @@ dependencies {
     // Dexter runtime permissions
     implementation 'com.karumi:dexter:6.2.3'
 
-    //workManager
-    implementation "androidx.work:work-runtime-ktx:2.6.0"
+    //Hilt
+    implementation 'com.google.dagger:hilt-android:2.38.1'
+    kapt 'com.google.dagger:hilt-compiler:2.38.1'
+
+
+
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+}
+
+kapt {
+    correctErrorTypes true
 }

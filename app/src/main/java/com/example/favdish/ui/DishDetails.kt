@@ -21,10 +21,10 @@ import com.example.favdish.R
 import com.example.favdish.databinding.FragmentDishDetailsBinding
 import com.example.favdish.models.FavDish
 import com.example.favdish.ui.viewmodel.FavDishViewModel
-import com.example.favdish.ui.viewmodel.FavDishViewModelProvider
 import com.example.favdish.utiles.Constants
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DishDetails : Fragment(R.layout.fragment_dish_details) {
 
     private var _binding: FragmentDishDetailsBinding? = null
@@ -32,9 +32,7 @@ class DishDetails : Fragment(R.layout.fragment_dish_details) {
     private val args by navArgs<DishDetailsArgs>()
     private var dish: FavDish ?= null
 
-    private val mFavDishViewModel: FavDishViewModel by viewModels {
-        FavDishViewModelProvider((activity?.application as FavDishApplication).repository)
-    }
+    private val mFavDishViewModel: FavDishViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentDishDetailsBinding.bind(view)

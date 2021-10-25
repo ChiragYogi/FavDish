@@ -37,7 +37,6 @@ import com.example.favdish.databinding.DialogCustomeImageSelectionBinding
 import com.example.favdish.models.FavDish
 import com.example.favdish.ui.adepter.CustomListItemAdepter
 import com.example.favdish.ui.viewmodel.FavDishViewModel
-import com.example.favdish.ui.viewmodel.FavDishViewModelProvider
 import com.example.favdish.utiles.Constants
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -47,6 +46,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -54,6 +54,8 @@ import java.io.OutputStream
 import java.util.*
 
 
+
+@AndroidEntryPoint
 class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener{
 
     private lateinit var binding: ActivityAddUpdateDishBinding
@@ -63,9 +65,7 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener{
 
     private  var mFavDishDetail: FavDish? = null
 
-    private val mFavDishViewModel: FavDishViewModel by viewModels {
-    FavDishViewModelProvider((application as FavDishApplication).repository)
-    }
+    private val mFavDishViewModel: FavDishViewModel by viewModels()
 
     private val activityResultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->

@@ -14,18 +14,16 @@ import com.example.favdish.databinding.FragmentFavoriteDishBinding
 import com.example.favdish.models.FavDish
 import com.example.favdish.ui.adepter.FavDishAdepter
 import com.example.favdish.ui.viewmodel.FavDishViewModel
-import com.example.favdish.ui.viewmodel.FavDishViewModelProvider
 import com.example.favdish.utiles.Constants
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class FavoriteDishFragment : Fragment(R.layout.fragment_favorite_dish), FavDishAdepter.OnItemClick {
 
     private var _binding: FragmentFavoriteDishBinding? = null
     private val binding get() = _binding!!
     val mAdepter = FavDishAdepter(this)
-    private  val mFavDishViewModel: FavDishViewModel by viewModels {
-        FavDishViewModelProvider((activity?.application as FavDishApplication).repository)
-    }
+    private  val mFavDishViewModel: FavDishViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
