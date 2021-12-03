@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+        //this is for up buttomn
     }
 
     //fix memory  leek on android 10
