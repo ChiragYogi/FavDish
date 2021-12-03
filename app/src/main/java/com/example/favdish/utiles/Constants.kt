@@ -6,6 +6,10 @@ object  Constants {
 
      const val IMAGE_DIRECTORY = "FavDishImages"
 
+    const val MAX_NAME_LENGTH = 20
+    const val MAX_PRICE_LENGTH = 10
+    const val GRIDE_SPAN_COUNT = 2
+
     //key value
     const val TAGE_VALUE = "vegetarian, dessert"
     const val API_ENDPOINTS = "recipes/random"

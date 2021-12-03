@@ -4,8 +4,11 @@ package com.example.favdish.di
 import android.content.Context
 import androidx.room.Room
 import com.example.favdish.database.FavDishDao
+import com.example.favdish.database.FavDishDao_Impl
 import com.example.favdish.database.FavDishDatabase
 import com.example.favdish.network.RandomDishService
+import com.example.favdish.repository.FavDishImpl
+import com.example.favdish.repository.FavDishRepository
 import com.example.favdish.utiles.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -54,6 +57,15 @@ object AppModule {
     @Provides
     fun provideDishDao(dishDatabase: FavDishDatabase): FavDishDao{
         return dishDatabase.getFavDishDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideFavDishRepository(
+        favDishService: RandomDishService,
+        dao: FavDishDao
+    ): FavDishImpl{
+        return FavDishRepository(favDishService,dao)
     }
 
 

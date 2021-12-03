@@ -18,10 +18,11 @@ import java.io.IOException
 import javax.inject.Inject
 
 class FavDishRepository @Inject constructor(
-    private val favDishService: RandomDishService
-    ,private val favDishDao:FavDishDao){
+    private val favDishService: RandomDishService,
+    private val favDishDao:FavDishDao
+): FavDishImpl{
 
-    suspend fun getRandomDish(): Resource<RandomRecipesResponce>{
+    override suspend fun getRandomDish(): Resource<RandomRecipesResponce>{
         return try {
             withContext(Dispatchers.IO){
                 val response  =
@@ -42,27 +43,27 @@ class FavDishRepository @Inject constructor(
         }
     }
 
-     fun getAllDish(): Flow<List<FavDish>>{
+     override fun getAllDish(): Flow<List<FavDish>>{
         return favDishDao.getAllDish()
     }
 
-     fun getFavoriteDish(): Flow<List<FavDish>>{
+    override fun getFavoriteDish(): Flow<List<FavDish>>{
         return favDishDao.getFavoriteDish()
     }
 
-     fun getDishByType(query: String): Flow<List<FavDish>>{
+    override fun getDishByType(query: String): Flow<List<FavDish>>{
         return favDishDao.getDishByType(query)
     }
 
-   suspend fun insertDish(favDish: FavDish){
+    override suspend fun insertDish(favDish: FavDish){
        favDishDao.insertDish(favDish)
    }
 
-    suspend fun updateDish(favDish: FavDish){
+    override suspend fun updateDish(favDish: FavDish){
         favDishDao.updateDish(favDish)
     }
 
-    suspend fun deleteDish(favDish: FavDish){
+    override suspend fun deleteDish(favDish: FavDish){
         favDishDao.deleteDish(favDish)
     }
 
